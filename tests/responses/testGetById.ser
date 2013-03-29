@@ -1,0 +1,1 @@
+a:1:{i:0;a:2:{s:5:"query";s:33:"SELECT * FROM person WHERE id = 3";s:8:"response";a:1:{i:0;a:7:{s:2:"id";i:3;s:9:"region_id";i:2;s:7:"role_id";i:1;s:7:"created";i:1359985900;s:5:"email";s:16:"fred@example.com";s:10:"first_name";s:4:"Fred";s:9:"last_name";s:10:"Flintstone";}}}}
