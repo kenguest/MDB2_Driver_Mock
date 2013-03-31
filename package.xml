@@ -13,8 +13,8 @@
   <email>kguest@php.net</email>
   <active>yes</active>
  </lead>
- <date>2013-03-29</date>
- <time>22:21:40</time>
+ <date>2013-03-31</date>
+ <time>23:36:59</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -31,6 +31,11 @@ Experimental
   <dir baseinstalldir="/" name="/">
    <dir name="MDB2">
     <dir name="Driver">
+     <dir name="Datatype">
+      <file name="mock.php" role="php">
+       <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+      </file>
+     </dir> <!-- /MDB2/Driver/Datatype -->
      <file name="mock.php" role="php">
       <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
      </file>
@@ -51,6 +56,9 @@ Experimental
      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
     </file>
    </dir> <!-- /tools -->
+   <file name="README.md" role="data">
+    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+   </file>
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -79,7 +87,7 @@ Experimental
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2013-03-29</date>
+   <date>2013-03-31</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.html">BSD License</license>
    <notes>
 Experimental
