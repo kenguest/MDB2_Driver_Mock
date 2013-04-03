@@ -1,0 +1,1 @@
+a:1:{i:0;a:2:{s:5:"query";s:141:"insert into person (email, username, password, role, active, full_name) VALUES ('fred@example.com', 'fredf', 'df2cdc123456', 1, 1, 'Fred F.')";s:8:"response";i:1;}}
