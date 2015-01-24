@@ -11,7 +11,11 @@
  * @license  BSD License, http://www.opensource.org/licenses/bsd-license.html
  * @link     Test.php
  */
-require_once 'PHPUnit/Framework/TestCase.php';
+
+// don't pull in file if using phpunit installed as a PHAR
+if (stream_resolve_include_path('PHPUnit/Framework/TestCase.php')) {
+    include_once 'PHPUnit/Framework/TestCase.php';
+}
 require 'MDB2.php';
 
 /**
@@ -27,8 +31,30 @@ require 'MDB2.php';
 class Test extends PHPUnit_Framework_TestCase
 {
 
+
     /**
-     * testGetById
+     * Test inserting a row
+     *
+     * @return void
+     */
+    function testInsert()
+    {
+        $mock = MDB2::factory(
+            array(
+                'phptype' => 'mock',
+                'database' => './responses/testInsert.ser'
+            )
+        );
+        $q = "insert into person
+        (email, username, password, role, active, full_name)
+        VALUES ('fred@example.com', 'fredf', 'df2cdc123456', 1, 1, 'Fred F.')";
+        $res = $mock->query($q);
+        $id = $mock->lastInsertID();
+        $this->assertEquals(1, $id);
+    }
+
+    /**
+     * TestGetById
      *
      * @return void
      */
@@ -42,7 +68,6 @@ class Test extends PHPUnit_Framework_TestCase
         );
         $q = "SELECT *
             FROM person WHERE id = 3";
-        $db = $mock;
         $res = $mock->query($q);
         // assert we got just the one row.
         $this->assertEquals($res->numRows(), 1);
@@ -56,6 +81,43 @@ class Test extends PHPUnit_Framework_TestCase
             $mock->getQueries(),
             array("SELECT * FROM person WHERE id = 3")
         );
+    }
+
+    /**
+     * Test doing a simple update
+     *
+     * @return void
+     */
+    function testUpdate()
+    {
+        $mock = MDB2::factory(
+            array(
+                'phptype' => 'mock',
+                'database' => './responses/testUpdate.ser'
+            )
+        );
+        $q = "UPDATE person set role_id = 2 WHERE id = 3";
+        $res = $mock->exec($q);
+        $this->assertEquals($res, 1);
+    }
+
+    /**
+     * Test deleting a row from some table
+     *
+     * @return void
+     */
+    function testDelete()
+    {
+        $mock = MDB2::factory(
+            array(
+                'phptype' => 'mock',
+                'database' => './responses/testDelete.ser'
+            )
+        );
+        $q = "DELETE FROM person WHERE id = 3";
+        $res = $mock->exec($q);
+        $this->assertEquals($res, 1);
+
     }
 
 }
